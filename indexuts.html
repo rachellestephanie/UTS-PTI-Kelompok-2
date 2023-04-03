@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>UMNGotcha</title>
+</head>
+<body>
+  
+  <div class="d-flex justify-content-center">
+    <img id="tr" src="pawwww.png">
+  </div>
+
+  <div id="page1" class="container-fluid">
+    <div class="d-flex justify-content-center">
+      <div id="umn_gotcha">
+        <h2>UMN Gotcha</h2>
+      </div>
+    </div>
+    <div id="pet" class="carousel carousel-dark slide" data-ride="carousel" data-bs-pause="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="pet/catgifttt.gif" class="d-block w-100">
+          <p class="text-center">CAT</p>
+          <br/>
+        </div>
+        <div class="carousel-item">
+          <img src="pet/doggift.gif" class="d-block w-100">
+          <p class="text-center">DOG</p>
+        </div>
+      </div>
+      <button onclick="minusPetNum()" class="carousel-control-prev" type="button" data-bs-target="#pet" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button onClick="addPetNum()" class="carousel-control-next" type="button" data-bs-target="#pet" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <p>Enter your name pet</p>
+    </div>
+    <div class="d-flex justify-content-center">
+      <input type="text" id="name">
+    </div>
+    <div class="d-flex justify-content-center">
+      <button id="play" class="play" style="vertical-align: middle;">
+        <span style="top: -10px;">Play Game</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="page2" class="container-fluid">
+    <div class="d-flex justify-content-center">
+      <div class="clock" href="style.css" id="clock">
+        <span class="clock-time" href="style.css" id="clock-time"></span>
+        <span class="ampm" href="style.css" id="ampm"></span>
+      </div>
+    </div>
+
+    <p id="player" class="d-flex justify-content-center"></p>
+    <p id="level" class="d-flex justify-content-center">Level 1</p>
+
+    <div>
+      <p id="statusMakan"></p>
+      <p id="statusMain"></p>
+      <p id="statusTidur"></p>
+      <p id="statusKesehatan"></p>
+    </div>
+    <hr/>
+
+    <div class="d-flex justify-content-center">
+      <div class="card" style="background-color: burlywood;">
+        <div id="playerPet" style="margin-bottom: 15px;"></div>
+        <table class="d-flex justify-content-center">
+          <tr id="energi">
+            <td colspan="2" href="style.css" id="word">Status: Idle</td>
+            <tr id="desc">
+              <td id="status"></td>
+              <td id="status"></td>
+              <tr>
+                <td>Makan</td>
+                <td><progress id="makan" value="50" max="100"></progress></td>
+              </tr>
+              <tr>
+                <td>Bermain</td>
+                <td><progress id="bermain" value="50" max="100"></progress></td>
+              </tr>
+              <tr>
+                <td>Tidur</td>
+                <td><progress id="tidur" value="50" max="100"></progress></td>
+              </tr>
+              <tr>
+                <td>Kesehatan</td>
+                <td><progress id="kesehatan" value="50" max="100"></progress></td>
+              </tr>
+            </tr>
+          </tr>
+        </table>
+        <div id="tombol_main">
+          <button type="button" onclick="playGame()">Play</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <td><button type="increase"id="makanButton"href=style.css id="button">Makan</button></td>
+          <td><button type="increase"id="bermainButton"href=style.css id="button">Bermain</button></td>
+          <td><button type="increase"id="tidurButton"href=style.css id="button">Tidur</button></td>
+          <td><button type="increase"id="kesehatanButton"href=style.css id="button">Obat</button></td>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    var PetNum = 1;
+    var levelVal = 1;
+    var busy = 1;
+    var counter = 0;
+    var decMakan = 0;
+    var decBermain = 0;
+    var decTidur = 0;
+    var decKesehatan = 0;
+    var allow = 1;
+    var date;
+    var hour;
+    var minute;
+    var petMakan = 1;
+    var petBermain = 1;
+    var petKesehatan = 1;
+    var petTidur = 1;
+    var validate = 0;
+
+    function addPetNum(){
+      PetNum++;
+      if(PetNum == 3){
+        PetNum = 1;
+      }
+    }
+
+    function minusPetNum(){
+      PetNum--;
+      if(PetNum == 0){
+        PetNum = 2
+      }
+    }
+
+    $(function (){
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    $("#character-2").hide();
+
+    function arrow(){
+      $("#character-1").toggle();
+      $("#character-2").toggle();
+    }
+
+    $(function(){
+      $('#page2')
+      .hide();
+    });
+
+    $("#play").click(function(){
+        decMakan = 1;
+        decBermain = 1;
+        decTidur = 1;
+        checkKesehatan = 0;
+        allow = 1;
+        date = new Date();
+        hour = date.getHours();
+        minute = date.getMinutes();
+        $("#page1").fadeOut();
+        $("#page2").fadeIn();
+        playerName = $("#name").val();
+        if(PetNum == 1){
+          $('#playerPet').prepend($('<img>',{src:'pet/catgifttt.gif'}));
+        }else if(PetNum == 2){
+          $('#playerPet').prepend($('<img>',{src:'pet/doggift.gif'}));
+        }
+    });
+
+    $("#makanButton").click(function(){
+      if(allow == 1){
+        if(PetNum == 1){
+          $("#playerPet img").attr("src", "pet/cateat.gif");
+        }else if(PetNum == 2){
+          $("#playerPet img").attr("src", "pet/dogmakan.gif");
+        }
+        allow = 0;
+        busy = 2 + (0.1 * levelVal);
+        $("#word").text("Status: Makan");
+        var makanIncrement = window.setInterval(function(){
+          if(PetNum == 2){
+            document.getElementById("makan").value += (2 - (0.05 * levelVal)) + (document.getElementById("makan").value / 50);
+          }else{
+            document.getElementById("makan").value += (2 * petMakan) - (0.05 * levelVal);
+          }
+          counter += 1;
+          checkMakan = 0;
+          if(counter >= 10){
+            if(PetNum == 1){
+              $("#playerPet img").attr("src", "pet/catgifttt.gif");
+            }else if(PetNum == 2){
+              $("#playerPet img").attr("src", "pet/doggift.gif");
+            }
+            counter = 0;
+            busy = 1;
+            allow = 1;
+            $("#word").text("Status: Idle");
+            clearInterval(makanIncrement);
+          }
+          if(document.getElementById("makan").value >= 100){
+            if(PetrNum == 1){
+              $("#playerPet img").attr("src", "pet/catgifttt.gif");
+            }else if(PetNum == 2){
+              $("#playerPet img").attr("src", "pet/doggift.gif");
+            }
+            counter = 0;
+            busy = 1;
+            allow = 1;
+            document.getElementById("makan").value = 0;
+            levelVal++;
+            $("#word").text("Status: Idle");
+            $("#level").text("Level " + levelVal);
+            clearInterval(makanIncrement);
+          }
+        }, 500);
+      }
+    });
+
+    $("#bermainButton").click(function(){
+      if(allow == 1){
+        if(PetNum == 1){
+          $("#playerPet img").attr("src", "pet/catmain.gif");
+        }else if(PetNum == 2){
+        $("#playerPet img").attr("src", "pet/dogmain.gif");
+        }
+        allow = 0;
+        busy = 2 + (0.1 * levelVal);
+        $("#word").text("Status: Bermain");
+        var bermainIncrement = window.setInterval(function(){
+          if(PetNum == 2){
+            document.getElementById("bermain").value += (2 - (0.05 * levelVal)) + (document.getElementById("bermain").value / 50);
+          }else{
+            document.getElementById("bermain").value += (2 * petBermain) - (0.05 * levelVal);
+          }
+          counter += 1;
+          checkBermain = 0;
+          if(counter >= 10){
+            if(PetNum == 1){
+              $("#playerPet img").attr("src", "pet/catgifttt.gif");
+            }else if(PetNum == 2){
+              $("#playerPet img").attr("src", "pet/doggift.gif");
+            }
+            counter = 0;
+            busy = 1;
+            allow = 1;
+            $("#word").text("Status: Idle");
+            clearInterval(bermainIncrement);
+          }
+          if(document.getElementById("bermain").value >= 100){
+            if(PetrNum == 1){
+              $("#playerPet img").attr("src", "Pet/catgifttt.gif");
+            }else if(PetNum == 2){
+              $("#playerPet img").attr("src", "pet/doggift.gif");
+            }
+            counter = 0;
+            busy = 1;
+            allow = 1;
+            document.getElementById("bermain").value = 0;
+            levelVal++;
+            $("#word").text("Status: Idle");
+            $("#level").text("Level " + levelVal);
+            clearInterval(bermainIncrement);
+          }
+        }, 500);
+      }
+    });
+
+    $("#kesehatanButton").click(function(){
+      if(allow == 1){
+        if(PetNum == 1){
+          $("#playerPet img").attr("src", "pet/catgifttt.gif");
+        }else if(PetNum == 2){
+          $("#playerPet img").attr("src", "pet/doggift.gif");
+        }
+        allow = 0;
+        decTidur = 0;
+        busy = 2;
+        $("#word").text("Status: Kesehatan");
+        var kesehatanIncrement = window.setInterval(function(){
+          document.getElementById("kesehatan").value += 2 * petKesehatan;
+          counter += 1;
+          if(counter >= 10){
+            if(PetNum == 1){
+              $("#playerPet img").attr("src", "pet/catgifttt.gif");
+            }else if(PetNum == 2){
+              $("#playerPet img").attr("src", "pet/doggift.gif");
+            }
+            counter = 0;
+            busy = 1;
+            allow = 1;
+            decKesehatan = 1;
+            $("#word").text("Status: Idle");
+            clearInterval(kesehatanIncrement);
+          }
+        }, 500);
+      }
+    });
+
+    $("#tidurButton").click(function(){
+      if(allow == 1){
+        if(PetNum == 1){
+          $("#playerPet img").attr("src", "pet/cattidur.gif");
+        }else if(PetNum == 2){
+          $("#playerPet img").attr("src", "pet/dogtidur.gif");
+        }
+        allow = 0;
+        decTidur = 0;
+        busy = 2;
+        $("#word").text("Status: Tidur");
+        var tidurIncrement = window.setInterval(function(){
+          document.getElementById("tidur").value += 2 * petTidur;
+          counter += 1;
+          if(counter >= 10){
+            if(PetNum == 1){
+              $("#playerPet img").attr("src", "pet/catgifttt.gif");
+            }else if(PetNum == 2){
+              $("#playerPet img").attr("src", "pet/doggift.gif");
+            }
+            counter = 0;
+            busy = 1;
+            allow = 1;
+            decTidur = 1;
+            $("#word").text("Status: Idle");
+            clearInterval(tidurIncrement);
+          }
+        }, 500);
+      }
+    });
+
+    var decrementMakan = window.setInterval(function(){
+      if(decMakan == 1){
+        if(PetNum == 2){
+          document.getElementById("makan").value -= 1*busy + (0.1 * levelVal);
+        }else{
+          document.getElementById("makan").value -= 0.3*busy + (0.05 * levelVal);
+        }
+      }
+    }, 1000);
+
+    var decrementKesehatan = window.setInterval(function(){
+      if(decKesehatan == 1){
+        if(PetNum == 2){
+          document.getElementById("kesehatan").value -= 1*busy + (0.1 * levelVal);
+        }else{
+          document.getElementById("kesehatan").value -= 0.3*busy + (0.05 * levelVal);
+        }
+      }
+    }, 1000);
+
+    var decrementTidur = window.setInterval(function(){
+      if(decTidur == 1){
+        if(PetNum == 2){
+          document.getElementById("tidur").value -= 0.7*busy + (0.05 * levelVal);
+        }else{
+          document.getElementById("tidur").value -= 0.3*busy + (0.05 * levelVal);
+        }
+      }
+    }, 1000);
+
+    var IncrementCheckBermain = window.setInterval(function(){
+      checkBermain++;
+    }, 1000);
+
+
+
+    var checkStatus = window.setInterval(function(){
+      if(hour > 5 && hour < 12){
+        $("#player").text("Good Morning " + playerName);
+        $("body").css("background-color", "rgb(130, 200, 130)");
+        document.body.style.backgroundImage = "url('time/pagi.jpg')";
+      }else if(hour >= 12 && hour < 15){
+        $("#player").text("Good Afternoon " + playerName);
+        $("body").css("background-color", "darkseagreen");
+        document.body.style.backgroundImage = "url('time/siang.jpg')";
+      }else if(hour >= 15 && hour < 18){
+        $("#player").text("Good Evening " + playerName);
+        $("body").css("background-color", "rgb(110, 170, 110)");
+        document.body.style.backgroundImage = "url('time/siang.jpg')";
+      }else if(hour >= 18 && hour <= 23){
+        $("#player").text("Good Night " + playerName);
+        $("body").css("background-color", "rgb(65, 105, 65)");
+        document.body.style.backgroundImage = "url('time/malam.jpg')";
+      }else if(hour >= 0 && hour < 6){
+        $("#player").text("Good Night " + playerName);
+        $("body").css("background-color", "rgb(65, 105, 65)");
+        document.body.style.backgroundImage = "url('time/malam.jpg')";
+      }
+      if(document.getElementById("makan").value <= 20){
+        $("#statusMakan").text("Lapar! ");
+        if(document.getElementById("makan").value <= 0){
+          $("#statusMakan").text("Mati Kelaparan! ");
+          decMakan = 0;
+          decKesehatan = 0;
+          decTidur = 0;
+          allow = 0;
+          $("#word").text("Status: Game Over!");
+          clearInterval(IncrementCheckBelajar);
+          clearInterval(time);
+        }
+      }
+      else{
+        $("#statusMakan").text(" ");
+      }
+      if(document.getElementById("kesehatan").value <= 20){
+        $("#statusKesehatan").text("Sakit! ");
+        if(document.getElementById("main").value <= 0){
+          $("#statusKesehatan").text("Mati terkena penyakit x_x ");
+          decMakan = 0;
+          decKesehatan = 0;
+          decTidur = 0;
+          allow = 0;
+          $("#word").text("Status: Game Over!");
+          clearInterval(IncrementCheckBermain);
+          clearInterval(time);
+        }
+      }
+      else{
+        $("#statusKesehatan").text(" ");
+      }
+      if(document.getElementById("tidur").value <= 20)
+      {
+        $("#statusTidur").text("Ngantuk! ");
+        if(document.getElementById("tidur").value <= 0){
+          $("#statusTidur").text("Mati kelelahan ");
+          decMakan = 0;
+          decKesehatan = 0;
+          decTidur = 0;
+          allow = 0;
+          $("#word").text("Status: Game Over!");
+          clearInterval(IncrementCheckBermain);
+          clearInterval(time);
+        }
+      }
+      else{
+      $("#statusTidur").text(" ");
+      }
+      if(document.getElementById("main").value <= 20)
+      {
+        $("#statusMain").text("Bosennn! ");
+        if(checkBermain >= 45){
+          $("#statusMain").text("Stresss! ");
+          decMakan = 0;
+          decKesehatan = 0;
+          decTidur = 0;
+          allow = 0;
+          $("#word").text("Status: Game Over!");
+          clearInterval(IncrementCheckBermain);
+          clearInterval(time);
+        }
+      }
+      else{
+        $("#statusBermain").text(" ");
+      }
+      if(levelVal > 8){
+        decMakan = 0;
+        decKesehatan = 0;
+        decTidur = 0;
+        allow = 0;
+        $("#level").text("Level 8");
+        $("#word").text("Status: Selamat Anda Menang!");
+      }
+    }, 100);
+
+    var time = window.setInterval(function(){
+      if(minute < 10){
+        $("#clock-time").text(hour + ":0" + minute);
+      }
+      else{
+        $("#clock-time").text(hour + ":" + minute);
+      }
+      if(hour < 10){
+        $("#clock-time").text('0' + hour + ":" + minute);
+        if(minute < 10){
+          $("#clock-time").text("0" + hour + ":0"+ minute);
+        }
+      }
+      minute += 1;
+      if(minute >= 60){
+        minute = 0;
+        hour +=1;
+        if(hour >= 23){
+          hour = 0;
+        }
+      }
+    }, 1000);
+
+    var timeExtra = window.setInterval(function(){
+      if(busy > 1){
+        if(minute < 10){
+          $("#clock-time").text(hour + ":0" + minute);
+        }
+        else{
+          $("#clock-time").text(hour + ":" + minute);
+        }
+        if(hour < 10){
+          $("#clock-time").text('0' + hour + ":" + minute);
+          if(minute < 10){
+            $("#clock-time").text("0" + hour + ":0"+ minute);
+          }
+        }
+        minute += 1;
+        if(minute >= 60){
+          minute = 0;
+          hour +=1;
+          if(hour >= 23){
+            hour = 0;
+          }
+        }
+      }
+    }, 50);
+    
+    function playGame() {
+      window.location.href = "game.html";
+    }
+  </script>
+
+</body>
+</html>

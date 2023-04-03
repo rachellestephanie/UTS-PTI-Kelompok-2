@@ -1,0 +1,217 @@
+body{
+    background-image: url('time/pagi.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+#tr{
+    display: block;
+    margin: auto;
+    width: 150px;
+    background-size: 50%;
+}
+
+#pet img{
+    display: block;
+    align-self: center;
+    padding: 350px;
+    margin-top: -250px;
+    margin-bottom: -250px;
+}
+
+.carousel-inner img
+{
+    width: 50px;
+}
+
+p{
+    font-size: 24px;
+          font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+          color:#262121;
+}
+
+.card{
+    max-width: 400px;
+    max-height: 800px;
+    color: #000000;
+    border-radius: 15px;
+    box-shadow: 0px 5px 8px;
+    top: -5px;
+}
+
+.play{
+    text-decoration: "Comic Sans";
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 15px;
+    background-color: #f4511e;
+    border: 5px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 18px 0px;
+    width: 100px;
+    height: 40px;
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 0 3px #999;
+}
+
+.play span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.play span:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.play:hover span {
+    padding-right: 25px;
+}
+
+.play:hover span:after{
+    opacity: 1;
+    right: 0;
+}
+
+.play:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.button span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 30px;
+    transition: 0.5s;
+}
+
+.button:hover span{
+    padding-right: 0px;
+}
+
+.button:hover span:after{
+    opacity: 1;
+    right: 0px;
+}
+  
+.buttonl span{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.buttonl span:after{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0px;
+    transition: 0.5s;
+}
+
+.buttonl:hover span{
+    padding-right: 0px;
+}
+
+.buttonl:hover span:after{
+    opacity: 1;
+    left: 30;
+}
+
+.body{
+    background-color:darkseagreen; 
+}
+
+#clock{
+    background: red;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#ampm{
+    font-family: "Comic Sans", cursive;
+    font-size: 30px;
+    color: white;
+    text-align:center;
+}
+
+#clock-time{
+    font-size: 48px;
+    font-family: "Comic Sans", cursive;
+    color: white;
+    text-align:center;
+}
+
+#button{
+    border: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: "Comic Sans";
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#Process{
+    width: 100%;
+    background-color: #ddd;
+}
+
+#Bar{
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+#energi{
+    text-align: center;
+    background-color: pink;
+}
+
+#status{
+    background-color: lightgray;
+}
+
+#cap{
+    display: block;
+    margin: auto;
+    width: 150px;
+}
+
+#umn_gotcha{
+    display: block;
+    margin: 0px 50px;
+    border-color: black;
+    height: 45px;
+    border-bottom: 3px solid;
+    border-width: 100%;
+    text-align: center;
+    font-family: fantasy;
+}
